@@ -38,3 +38,13 @@ int main( int argc, char* argv[] )
         //Writing to the target fileOpen
         write( targetFile, readBuff, strlen( readBuff ) + 1 );
     } else {
+    // inside the parent process
+        close( fdone[0] );
+        // code to read from a text file
+ 
+        while( (readCounter = read( fileOpen, readBuff, sizeof( readBuff ) ) > 0 ) )  {
+        write( fdone[1], readBuff, sizeof( readBuff ) );
+        }
+        close( fdone[1] );
+    }
+}
