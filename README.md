@@ -30,3 +30,11 @@ int main( int argc, char* argv[] )
     childid = fork();
  
     if( childid == 0 ) {
+    close( fdone[1] );
+ 
+        read( fdone[0], readBuff, sizeof( readBuff ) );
+        printf( "The recived string is : %s", readBuff );
+ 
+        //Writing to the target fileOpen
+        write( targetFile, readBuff, strlen( readBuff ) + 1 );
+    } else {
